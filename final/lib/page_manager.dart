@@ -33,14 +33,13 @@ class PageManager {
   }
 
   void _setInitialPlaylist() async {
-    const prefix = 'https://www.soundhelix.com/examples/mp3';
-    final song1 = Uri.parse('$prefix/SoundHelix-Song-1.mp3');
-    final song2 = Uri.parse('$prefix/SoundHelix-Song-2.mp3');
-    final song3 = Uri.parse('$prefix/SoundHelix-Song-3.mp3');
+    final stream1 = Uri.parse('https://storage.googleapis.com/curi-406812.appspot.com/191c168b-1525-40d2-9b04-6decabed242f.m3u8');
+    final stream2 = Uri.parse('https://storage.googleapis.com/curi-406812.appspot.com/99115ae6-e8ce-4e62-bf17-d01fe97bafb1.m3u8');
+    final stream3 = Uri.parse('https://storage.googleapis.com/curi-406812.appspot.com/008c1e89-44c2-4424-b505-49ecfc03a7c1.m3u8');
     _playlist = ConcatenatingAudioSource(children: [
-      AudioSource.uri(song1, tag: 'Song 1'),
-      AudioSource.uri(song2, tag: 'Song 2'),
-      AudioSource.uri(song3, tag: 'Song 3'),
+      HlsAudioSource(stream1, tag: '1'),
+      HlsAudioSource(stream2, tag: '2'),
+      HlsAudioSource(stream3, tag: '3'),
     ]);
     await _audioPlayer.setAudioSource(_playlist);
   }
